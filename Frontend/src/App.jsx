@@ -6,6 +6,7 @@ import { Layout } from './components/layout/Layout';
 import { AppRoutes } from './routes';
 import { ThemeProvider } from './context/ThemeContext';
 import { SettingsProvider } from './context/SettingsContext';
+import { AuthProvider } from './context/AuthContext';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { Toaster } from 'react-hot-toast';
 
@@ -25,11 +26,13 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <SettingsProvider>
-            <Router>
-              <Layout>
-                <AppRoutes />
-              </Layout>
-            </Router>
+            <AuthProvider>
+              <Router>
+                <Layout>
+                  <AppRoutes />
+                </Layout>
+              </Router>
+            </AuthProvider>
             <Toaster
               position="top-right"
               toastOptions={{
