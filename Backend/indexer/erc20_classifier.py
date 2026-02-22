@@ -10,7 +10,7 @@ class ERC20Classifier:
         "18160ddd",  # totalSupply()
         "70a08231",  # balanceOf(address)
         "a9059cbb",  # transfer(address,uint256)
-        "95ea7b3",   # approve(address,uint256)
+        "095ea7b3",  # approve(address,uint256)
         "23b872dd",  # transferFrom(address,address,uint256)
     }
     

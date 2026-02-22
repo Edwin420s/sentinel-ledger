@@ -1,36 +1,46 @@
 import asyncio
 import logging
+from datetime import datetime
 from web3 import Web3
 
 from config.settings import settings
 from config.chains import ETHEREUM
-from indexer.base_listener import BaseListener
+from db.session import SessionLocal
+from db.models import ProcessedBlock
+from indexer.block_processor import BlockProcessor
 
 logger = logging.getLogger(__name__)
 
-class EthereumListener(BaseListener):
+
+class EthereumListener:
+    """Listens to and indexes Ethereum blocks for cross-chain deployer intelligence."""
+
     def __init__(self):
         self.w3 = Web3(Web3.HTTPProvider(settings.ETH_RPC_URL))
         self.chain = ETHEREUM
         self.block_processor = BlockProcessor(self.w3, "ethereum")
         self.running = False
-    
+
     def get_last_processed_block(self) -> int:
-        """Get last processed block from database"""
+        """Get last processed block from database."""
         db = SessionLocal()
         try:
-            record = db.query(ProcessedBlock).filter(ProcessedBlock.chain == "ethereum").first()
+            record = db.query(ProcessedBlock).filter(
+                ProcessedBlock.chain == "ethereum"
+            ).first()
             if record:
                 return record.block_number
             return self.chain.start_block
         finally:
             db.close()
-    
+
     def update_last_processed_block(self, block_number: int, block_hash: str):
-        """Update last processed block"""
+        """Update last processed block."""
         db = SessionLocal()
         try:
-            record = db.query(ProcessedBlock).filter(ProcessedBlock.chain == "ethereum").first()
+            record = db.query(ProcessedBlock).filter(
+                ProcessedBlock.chain == "ethereum"
+            ).first()
             if record:
                 record.block_number = block_number
                 record.hash = block_hash
@@ -39,12 +49,53 @@ class EthereumListener(BaseListener):
                 record = ProcessedBlock(
                     chain="ethereum",
                     block_number=block_number,
-                    hash=block_hash
+                    hash=block_hash,
                 )
                 db.add(record)
             db.commit()
         except Exception as e:
-            logger.error(f"Failed to update last processed block: {e}")
+            logger.error(f"Failed to update last processed block (ethereum): {e}")
             db.rollback()
         finally:
             db.close()
+
+    async def run(self):
+        """Main listener loop."""
+        self.running = True
+        last_block = self.get_last_processed_block()
+
+        logger.info(f"Starting Ethereum listener from block {last_block}")
+
+        while self.running:
+            try:
+                current_block = self.w3.eth.block_number
+
+                if current_block <= last_block:
+                    await asyncio.sleep(12)  # ~1 Ethereum block time
+                    continue
+
+                start_block = last_block + 1
+                end_block = min(current_block, start_block + settings.MAX_BLOCK_BATCH)
+
+                logger.info(f"Ethereum: processing blocks {start_block} to {end_block}")
+
+                for block_num in range(start_block, end_block + 1):
+                    try:
+                        block = self.w3.eth.get_block(block_num, full_transactions=True)
+                        await self.block_processor.process_block(block_num, block)
+                        self.update_last_processed_block(block_num, block.hash.hex())
+                    except Exception as e:
+                        logger.error(f"Error processing Ethereum block {block_num}: {e}")
+                        continue
+
+                last_block = end_block
+                await asyncio.sleep(2)
+
+            except Exception as e:
+                logger.error(f"Ethereum listener error: {e}")
+                await asyncio.sleep(15)
+
+    def stop(self):
+        """Stop the listener."""
+        self.running = False
+        logger.info("Ethereum listener stopped")

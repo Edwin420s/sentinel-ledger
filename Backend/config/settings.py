@@ -1,50 +1,57 @@
-import os
 from typing import Optional
-from pydantic import BaseSettings, Field
+from pydantic_settings import BaseSettings
+from pydantic import Field
+
 
 class Settings(BaseSettings):
     # Environment
-    ENV: str = Field("development", env="ENV")
-    
+    ENV: str = Field("development")
+
     # RPC Endpoints
-    BASE_RPC_URL: str = Field(..., env="BASE_RPC_URL")
-    ETH_RPC_URL: str = Field(..., env="ETH_RPC_URL")
-    
+    BASE_RPC_URL: str = Field(..., alias="BASE_RPC_URL")
+    ETH_RPC_URL: str = Field(..., alias="ETH_RPC_URL")
+
     # Database
-    POSTGRES_HOST: str = Field("localhost", env="POSTGRES_HOST")
-    POSTGRES_PORT: int = Field(5432, env="POSTGRES_PORT")
-    POSTGRES_DB: str = Field("sentinel", env="POSTGRES_DB")
-    POSTGRES_USER: str = Field(..., env="POSTGRES_USER")
-    POSTGRES_PASSWORD: str = Field(..., env="POSTGRES_PASSWORD")
-    
+    POSTGRES_HOST: str = Field("localhost")
+    POSTGRES_PORT: int = Field(5432)
+    POSTGRES_DB: str = Field("sentinel")
+    POSTGRES_USER: str = Field(...)
+    POSTGRES_PASSWORD: str = Field(...)
+
     # Neo4j
-    NEO4J_URI: str = Field("bolt://localhost:7687", env="NEO4J_URI")
-    NEO4J_USER: str = Field("neo4j", env="NEO4J_USER")
-    NEO4J_PASSWORD: str = Field(..., env="NEO4J_PASSWORD")
-    
+    NEO4J_URI: str = Field("bolt://localhost:7687")
+    NEO4J_USER: str = Field("neo4j")
+    NEO4J_PASSWORD: str = Field(...)
+
     # Redis
-    REDIS_URL: str = Field("redis://localhost:6379", env="REDIS_URL")
-    
+    REDIS_URL: str = Field("redis://localhost:6379")
+
     # OpenRouter
-    OPENROUTER_API_KEY: Optional[str] = Field(None, env="OPENROUTER_API_KEY")
-    OPENROUTER_BASE_URL: str = Field("https://openrouter.ai/api/v1", env="OPENROUTER_BASE_URL")
-    
+    OPENROUTER_API_KEY: Optional[str] = Field(None)
+    OPENROUTER_BASE_URL: str = Field("https://openrouter.ai/api/v1")
+
     # Processing
-    BATCH_INTERVAL_SECONDS: int = Field(120, env="BATCH_INTERVAL_SECONDS")
-    MAX_BLOCK_BATCH: int = Field(100, env="MAX_BLOCK_BATCH")
-    
+    BATCH_INTERVAL_SECONDS: int = Field(120)
+    MAX_BLOCK_BATCH: int = Field(100)
+
     # Risk weights
     CONTRACT_RISK_WEIGHT: float = 0.35
     LIQUIDITY_RISK_WEIGHT: float = 0.30
     OWNERSHIP_RISK_WEIGHT: float = 0.20
     DEPLOYER_RISK_WEIGHT: float = 0.15
-    
+
     @property
     def POSTGRES_URL(self) -> str:
-        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
-    
-    class Config:
-        env_file = ".env"
-        case_sensitive = False
+        return (
+            f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
+            f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+        )
+
+    model_config = {
+        "env_file": ".env",
+        "case_sensitive": False,
+        "populate_by_name": True,
+    }
+
 
 settings = Settings()

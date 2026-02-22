@@ -1,0 +1,129 @@
+# ============================================================
+# Sentinel Ledger — .gitignore
+# ============================================================
+
+# -----------------------------------------------
+# Environment & Secrets
+# -----------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# -----------------------------------------------
+# Python
+# -----------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+wheels/
+*.whl
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# -----------------------------------------------
+# Virtual Environment
+# -----------------------------------------------
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# -----------------------------------------------
+# Alembic / Database
+# -----------------------------------------------
+# Keep migrations/versions tracked, but ignore local DB files
+*.db
+*.sqlite
+*.sqlite3
+
+# -----------------------------------------------
+# Testing & Coverage
+# -----------------------------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.coveragerc
+nosetests.xml
+test-results/
+
+# -----------------------------------------------
+# IDE & Editor
+# -----------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# -----------------------------------------------
+# Logs & Temp files
+# -----------------------------------------------
+*.log
+logs/
+*.tmp
+*.bak
+
+# -----------------------------------------------
+# Node.js / Frontend
+# -----------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Frontend build output
+Frontend/dist/
+Frontend/build/
+Frontend/.next/
+Frontend/out/
+
+# -----------------------------------------------
+# Docker
+# -----------------------------------------------
+# Keep Dockerfiles and docker-compose.yml tracked;
+# ignore local override files
+docker-compose.override.yml
+
+# -----------------------------------------------
+# Mypy / Type Checking
+# -----------------------------------------------
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# -----------------------------------------------
+# Jupyter Notebooks
+# -----------------------------------------------
+.ipynb_checkpoints/
+
+# -----------------------------------------------
+# OS-generated
+# -----------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
