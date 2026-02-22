@@ -2,8 +2,9 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { TokenTable } from '../components/tokens/TokenTable';
 import { RiskDistributionChart } from '../components/charts/RiskDistributionChart';
+import { TimelineChart } from '../components/charts/TimelineChart';
 import { Card } from '../components/common/Card';
-import { api } from '../services/api/client';
+import { api } from '../services';
 import { Loading } from '../components/common/Loading';
 import { Shield, Activity, AlertTriangle, Wallet } from '../assets/icons';
 
@@ -21,6 +22,11 @@ export const Dashboard = () => {
   const { data: highRiskTokens, isLoading: highRiskLoading } = useQuery({
     queryKey: ['high-risk-tokens'],
     queryFn: () => api.getHighRiskTokens(5),
+  });
+
+  const { data: trends } = useQuery({
+    queryKey: ['deployment-trends-dashboard'],
+    queryFn: () => api.getDeploymentTrends(7),
   });
 
   if (statsLoading || tokensLoading || highRiskLoading) {
@@ -90,27 +96,29 @@ export const Dashboard = () => {
           <RiskDistributionChart data={stats?.riskDistribution} />
         </Card>
         <Card title="Recent Activity">
-          <div className="h-64 flex items-center justify-center text-primary-500">
-            Activity timeline coming soon
-          </div>
+          <TimelineChart
+            data={trends?.timeline || []}
+            dataKey="deployments"
+            color="#14b8a6"
+          />
         </Card>
       </div>
 
       {/* Token Tables */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card title="Recently Deployed">
-          <TokenTable 
-            tokens={recentTokens} 
-            showRiskBadge 
-            compact 
+          <TokenTable
+            tokens={recentTokens}
+            showRiskBadge
+            compact
           />
         </Card>
 
         <Card title="High Risk Tokens">
-          <TokenTable 
-            tokens={highRiskTokens} 
-            showRiskBadge 
-            compact 
+          <TokenTable
+            tokens={highRiskTokens}
+            showRiskBadge
+            compact
           />
         </Card>
       </div>

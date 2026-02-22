@@ -1,5 +1,5 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { api } from '../services/api/client';
+import { api } from '../services';
 
 export const useTokens = (filters = {}) => {
   return useQuery({

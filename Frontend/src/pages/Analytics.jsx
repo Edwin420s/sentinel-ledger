@@ -6,12 +6,12 @@ import { DeploymentChart } from '../components/charts/DeploymentChart';
 import { TimelineChart } from '../components/charts/TimelineChart';
 import { Select } from '../components/common/Select';
 import { Loading } from '../components/common/Loading';
-import { api } from '../services/api/client';
+import { api } from '../services';
 import { formatNumber } from '../services/utils/formatters';
 
 export const Analytics = () => {
   const [timeframe, setTimeframe] = React.useState('7d');
-  
+
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['analytics-stats'],
     queryFn: () => api.getAnalyticsStats(),
@@ -92,8 +92,8 @@ export const Analytics = () => {
 
       {/* Timeline */}
       <Card title="Risk Score Timeline">
-        <TimelineChart 
-          data={trends?.timeline} 
+        <TimelineChart
+          data={trends?.timeline}
           dataKey="avgRiskScore"
           color="#14b8a6"
         />
