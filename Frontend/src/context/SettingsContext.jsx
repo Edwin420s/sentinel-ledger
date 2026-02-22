@@ -44,3 +44,5 @@ export const SettingsProvider = ({ children }) => {
     </SettingsContext.Provider>
   );
 };
+
+export const useSettings = () => React.useContext(SettingsContext);

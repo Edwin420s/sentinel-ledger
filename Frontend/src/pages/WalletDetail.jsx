@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { api } from '../services/api/client';
+import { api } from '../services/api/index';
 import { Card } from '../components/common/Card';
 import { TokenTable } from '../components/tokens/TokenTable';
 import { RiskBadge } from '../components/risk/RiskBadge';
@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 
 export const WalletDetail = () => {
   const { address } = useParams();
-  
+
   const { data: wallet, isLoading } = useQuery({
     queryKey: ['wallet', address],
     queryFn: () => api.getWallet(address),
@@ -89,7 +89,7 @@ export const WalletDetail = () => {
               <div className="flex justify-between">
                 <span className="text-primary-400">First Deployment</span>
                 <span className="font-medium">
-                  {wallet?.crossChainActivity?.base?.firstDeployment 
+                  {wallet?.crossChainActivity?.base?.firstDeployment
                     ? formatDate(wallet.crossChainActivity.base.firstDeployment)
                     : 'Never'}
                 </span>
@@ -106,7 +106,7 @@ export const WalletDetail = () => {
               <div className="flex justify-between">
                 <span className="text-primary-400">First Deployment</span>
                 <span className="font-medium">
-                  {wallet?.crossChainActivity?.ethereum?.firstDeployment 
+                  {wallet?.crossChainActivity?.ethereum?.firstDeployment
                     ? formatDate(wallet.crossChainActivity.ethereum.firstDeployment)
                     : 'Never'}
                 </span>

@@ -1,8 +1,8 @@
-export { default as apiClient } from './client';
-export { tokenApi } from './tokens';
-export { walletApi } from './wallets';
-export { analyticsApi } from './analytics';
-export { wsService } from './websocket';
+import apiClient from './client';
+import { tokenApi } from './tokens';
+import { walletApi } from './wallets';
+import { analyticsApi } from './analytics';
+import { wsService } from './websocket';
 
 // Combined API object
 export const api = {
@@ -10,3 +10,5 @@ export const api = {
   ...walletApi,
   ...analyticsApi,
 };
+
+export { apiClient, tokenApi, walletApi, analyticsApi, wsService };

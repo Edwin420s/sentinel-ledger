@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Card } from '../components/common/Card';
 import { Badge } from '../components/common/Badge';
-import { api } from '../services/api/client';
+import { api } from '../services/api/index';
 import { CheckCircle, XCircle, Activity } from '../assets/icons';
 
 export const Health = () => {

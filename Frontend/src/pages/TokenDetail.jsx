@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { api } from '../services/api/client';
+import { api } from '../services/api/index';
 import { RiskBadge } from '../components/risk/RiskBadge';
 import { ScoreBreakdown } from '../components/risk/ScoreBreakdown';
 import { FlagList } from '../components/risk/FlagList';
@@ -14,7 +14,7 @@ import { Shield, Calendar, User, Hash } from '../assets/icons';
 
 export const TokenDetail = () => {
   const { address } = useParams();
-  
+
   const { data: token, isLoading } = useQuery({
     queryKey: ['token', address],
     queryFn: () => api.getToken(address),
@@ -38,7 +38,7 @@ export const TokenDetail = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-semibold">
-            {token.name || 'Token'} 
+            {token.name || 'Token'}
             {token.symbol && <span className="text-primary-400 ml-2">${token.symbol}</span>}
           </h1>
           <div className="flex items-center space-x-4 mt-2">
@@ -60,7 +60,7 @@ export const TokenDetail = () => {
             </div>
           </div>
         </div>
-        
+
         <RiskBadge level={token.riskScore?.level} score={token.riskScore?.final} size="lg" />
       </div>
 

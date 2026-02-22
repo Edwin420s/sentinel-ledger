@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from '../services/api/client';
+import { api } from '../services/api/index';
 
 export const useRiskFeed = (limit = 50) => {
   return useQuery({

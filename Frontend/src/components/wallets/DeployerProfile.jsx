@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
-import { api } from '../../services/api/client';
+import { api } from '../../services/api/index';
 import { formatAddress } from '../../services/utils/formatters';
 import { User, ExternalLink } from '../../assets/icons';
 
 export const DeployerProfile = ({ deployer }) => {
   const navigate = useNavigate();
-  
+
   const { data: wallet, isLoading } = useQuery({
     queryKey: ['wallet', deployer],
     queryFn: () => api.getWallet(deployer),
