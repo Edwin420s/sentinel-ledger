@@ -143,3 +143,9 @@ dmypy.json
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+
+.env.production
+.env.development
+vercel.json
+netlify.toml

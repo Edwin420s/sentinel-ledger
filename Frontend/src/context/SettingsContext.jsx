@@ -1,31 +1,45 @@
-import React, { createContext, useContext } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React, { createContext, useState, useEffect } from 'react';
 
-const SettingsContext = createContext();
+export const SettingsContext = createContext();
 
-export const useSettings = () => {
-  const context = useContext(SettingsContext);
-  if (!context) {
-    throw new Error('useSettings must be used within SettingsProvider');
-  }
-  return context;
+const defaultSettings = {
+  defaultChain: 'base',
+  refreshInterval: 30000,
+  alertsEnabled: true,
+  riskThreshold: 50,
+  defaultView: 'dashboard',
+  alertTypes: {
+    highRisk: true,
+    newDeployments: true,
+    rugDetected: true,
+    liquidityChange: false,
+  },
+  theme: 'dark',
+  compactMode: false,
+  showTestnets: false,
+  language: 'en',
 };
 
 export const SettingsProvider = ({ children }) => {
-  const [settings, setSettings] = useLocalStorage('settings', {
-    defaultChain: 'base',
-    refreshInterval: 30000,
-    alertsEnabled: true,
-    riskThreshold: 50,
-    defaultView: 'dashboard',
+  const [settings, setSettings] = useState(() => {
+    const saved = localStorage.getItem('settings');
+    return saved ? { ...defaultSettings, ...JSON.parse(saved) } : defaultSettings;
   });
+
+  useEffect(() => {
+    localStorage.setItem('settings', JSON.stringify(settings));
+  }, [settings]);
 
   const updateSettings = (newSettings) => {
     setSettings(prev => ({ ...prev, ...newSettings }));
   };
 
+  const resetSettings = () => {
+    setSettings(defaultSettings);
+  };
+
   return (
-    <SettingsContext.Provider value={{ settings, updateSettings }}>
+    <SettingsContext.Provider value={{ settings, updateSettings, resetSettings }}>
       {children}
     </SettingsContext.Provider>
   );
