@@ -92,12 +92,28 @@ yarn-error.log*
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
+.pnp.*
 
-# Frontend build output
-Frontend/dist/
-Frontend/build/
-Frontend/.next/
-Frontend/out/
+# Build output (covers sentinel-ledger-frontend/ and any Frontend/ dir)
+dist/
+build/
+out/
+.next/
+
+# Vite cache
+.vite/
+
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# ESLint & Prettier cache
+.eslintcache
+.stylelintcache
+
+# Frontend env (keep .env.example tracked)
+sentinel-ledger-frontend/.env
+sentinel-ledger-frontend/.env.local
+sentinel-ledger-frontend/.env.*.local
 
 # -----------------------------------------------
 # Docker

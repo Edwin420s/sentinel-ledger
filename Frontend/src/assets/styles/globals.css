@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-0;
+  }
+
+  body {
+    @apply bg-primary-900 text-primary-100 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1 {
+    @apply text-3xl font-semibold tracking-tight;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-xl font-medium;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-primary-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-500;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-primary-800/50 backdrop-blur-sm rounded-lg border border-primary-700 
+           shadow-card hover:shadow-card-hover transition-all duration-200;
+  }
+
+  .glass-card {
+    @apply bg-primary-800/30 backdrop-blur-md rounded-lg border border-primary-700/50;
+  }
+
+  .metric-value {
+    @apply text-2xl font-semibold;
+  }
+
+  .metric-label {
+    @apply text-sm text-primary-400;
+  }
+
+  .risk-badge {
+    @apply px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .risk-low {
+    @apply bg-risk-low/10 text-risk-low border border-risk-low/20;
+  }
+
+  .risk-moderate {
+    @apply bg-risk-moderate/10 text-risk-moderate border border-risk-moderate/20;
+  }
+
+  .risk-high {
+    @apply bg-risk-high/10 text-risk-high border border-risk-high/20;
+  }
+
+  .risk-critical {
+    @apply bg-risk-critical/10 text-risk-critical border border-risk-critical/20;
+  }
+
+  .truncate-address {
+    @apply font-mono text-sm;
+  }
+
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table th {
+    @apply text-left py-3 px-4 text-primary-400 font-medium border-b border-primary-700;
+  }
+
+  .data-table td {
+    @apply py-3 px-4 border-b border-primary-700/50;
+  }
+
+  .data-table tr:hover td {
+    @apply bg-primary-700/30;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.2s ease-out;
+}
+
+.skeleton {
+  @apply bg-primary-700 animate-pulse rounded;
+}
