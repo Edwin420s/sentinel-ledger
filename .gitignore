@@ -149,3 +149,50 @@ $RECYCLE.BIN/
 .env.development
 vercel.json
 netlify.toml
+
+
+# Dependencies
+node_modules/
+.pnpm/
+.npm/
+.yarn/
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Production
+build/
+release/
+
+# Misc
+*.cache
+.temp
+.tmp
