@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
 from api.routes import tokens, wallets, analytics
+from debug_endpoint import router as debug_router
 
 logger = logging.getLogger(__name__)
 
@@ -56,6 +57,7 @@ async def shutdown_event():
 app.include_router(tokens.router, prefix="/api/v1/tokens", tags=["tokens"])
 app.include_router(wallets.router, prefix="/api/v1/wallets", tags=["wallets"])
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytics"])
+app.include_router(debug_router, prefix="/debug", tags=["debug"])
 
 # ---------------------------------------------------------------------------
 # Root endpoints

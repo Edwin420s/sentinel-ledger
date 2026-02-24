@@ -13,7 +13,7 @@ const ApiTest = () => {
   const testConnection = async () => {
     try {
       // Test health endpoint
-      const healthResponse = await fetch('http://localhost:8000/health');
+      const healthResponse = await fetch('/health');
       const healthData = await healthResponse.json();
       
       if (healthResponse.ok) {
