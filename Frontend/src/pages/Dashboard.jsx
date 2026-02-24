@@ -7,6 +7,7 @@ import { Card } from '../components/common/Card';
 import { api } from '../services';
 import { Loading } from '../components/common/Loading';
 import { Shield, Activity, AlertTriangle, Wallet } from '../assets/icons';
+import ApiTest from '../components/test/ApiTest';
 
 export const Dashboard = () => {
   const { data: stats, isLoading: statsLoading } = useQuery({
@@ -62,6 +63,9 @@ export const Dashboard = () => {
 
   return (
     <div className="space-y-6">
+      {/* API Test Component - Development Only */}
+      {process.env.NODE_ENV === 'development' && <ApiTest />}
+
       {/* Header */}
       <div>
         <h1 className="text-3xl font-semibold">Dashboard</h1>
