@@ -18,7 +18,7 @@ export const TokenSearch = ({ onSearch, onFilter }) => {
 
   React.useEffect(() => {
     onSearch(debouncedSearch);
-  }, [debouncedSearch, onSearch]);
+  }, [debouncedSearch, onSearch, query]); // Added query to the dependencies array
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };

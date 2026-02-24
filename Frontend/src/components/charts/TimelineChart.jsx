@@ -17,7 +17,7 @@ export const TimelineChart = ({ data, dataKey = 'value', color = '#14b8a6' }) =>
         <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
         <XAxis
           dataKey="timestamp"
-          tickFormatter={(timestamp) => format(new Date(timestamp), 'MMM d')}
+          tickFormatter={(timestamp) => timestamp ? format(new Date(timestamp), 'MMM d') : ''}
           stroke="#94a3b8"
         />
         <YAxis stroke="#94a3b8" />
@@ -28,7 +28,7 @@ export const TimelineChart = ({ data, dataKey = 'value', color = '#14b8a6' }) =>
             borderRadius: '0.5rem',
             color: '#f1f5f9',
           }}
-          labelFormatter={(label) => format(new Date(label), 'MMM d, yyyy HH:mm')}
+          labelFormatter={(label) => label ? format(new Date(label), 'MMM d, yyyy HH:mm') : ''}
         />
         <Line
           type="monotone"

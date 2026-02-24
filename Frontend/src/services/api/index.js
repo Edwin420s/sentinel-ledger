@@ -9,6 +9,10 @@ export const api = {
   ...tokenApi,
   ...walletApi,
   ...analyticsApi,
+  getDashboardStats: analyticsApi.getDashboardStats,
+  getRecentTokens: tokenApi.getRecentTokens,
+  getHighRiskTokens: tokenApi.getHighRiskTokens,
+  getDeploymentTrends: analyticsApi.getDeploymentTrends,
 };
 
 export { apiClient, tokenApi, walletApi, analyticsApi, wsService };
