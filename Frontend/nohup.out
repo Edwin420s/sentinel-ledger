@@ -1,0 +1,23 @@
+
+> sentinel-ledger-frontend@1.0.0 dev
+> vite
+
+Port 3000 is in use, trying another one...
+Port 3001 is in use, trying another one...
+
+  VITE v4.5.14  ready in 832 ms
+
+  ➜  Local:   http://localhost:3002/
+  ➜  Network: use --host to expose
+
+> sentinel-ledger-frontend@1.0.0 dev
+> vite
+
+Port 3000 is in use, trying another one...
+Port 3001 is in use, trying another one...
+Port 3002 is in use, trying another one...
+
+  VITE v4.5.14  ready in 992 ms
+
+  ➜  Local:   http://localhost:3003/
+  ➜  Network: use --host to expose

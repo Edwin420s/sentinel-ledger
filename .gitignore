@@ -94,7 +94,7 @@ yarn-error.log*
 .yarn/install-state.gz
 .pnp.*
 
-# Build output (covers sentinel-ledger-frontend/ and any Frontend/ dir)
+# Build output
 dist/
 build/
 out/
@@ -111,15 +111,13 @@ out/
 .stylelintcache
 
 # Frontend env (keep .env.example tracked)
-sentinel-ledger-frontend/.env
-sentinel-ledger-frontend/.env.local
-sentinel-ledger-frontend/.env.*.local
+Frontend/.env
+Frontend/.env.local
+Frontend/.env.*.local
 
 # -----------------------------------------------
 # Docker
 # -----------------------------------------------
-# Keep Dockerfiles and docker-compose.yml tracked;
-# ignore local override files
 docker-compose.override.yml
 
 # -----------------------------------------------
@@ -144,55 +142,10 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-
-.env.production
-.env.development
+# -----------------------------------------------
+# Production files
+# -----------------------------------------------
 vercel.json
 netlify.toml
-
-
-# Dependencies
-node_modules/
-.pnpm/
-.npm/
-.yarn/
-
-# Build outputs
-dist/
-dist-ssr/
-*.local
-
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Editor directories
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# Testing
-coverage/
-.nyc_output/
-
-# Production
-build/
-release/
-
-# Misc
-*.cache
-.temp
-.tmp
+.env.production
+.env.development
