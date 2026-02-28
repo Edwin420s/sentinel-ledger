@@ -4,6 +4,7 @@ import { Dashboard } from './pages/Dashboard';
 import { TokenDetail } from './pages/TokenDetail';
 import { WalletDetail } from './pages/WalletDetail';
 import { Explorer } from './pages/Explorer';
+import { Wallets } from './pages/Wallets';
 import { RiskFeed } from './pages/RiskFeed';
 import { Analytics } from './pages/Analytics';
 import { Settings } from './pages/Settings';
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/explorer" element={<Explorer />} />
+      <Route path="/wallets" element={<Wallets />} />
       <Route path="/token/:address" element={<TokenDetail />} />
       <Route path="/wallet/:address" element={<WalletDetail />} />
       <Route path="/risk-feed" element={<RiskFeed />} />
