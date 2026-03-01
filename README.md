@@ -69,7 +69,7 @@ Sentinel Ledger is a production-grade risk intelligence platform that monitors b
 
 ```bash
 # Clone and setup
-git clone <repository-url>
+git clone https://github.com/Edwin420s/sentinel-ledger.git
 cd sentinel-ledger
 ./setup.sh
 
