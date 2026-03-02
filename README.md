@@ -34,7 +34,7 @@ Sentinel Ledger is a production-grade risk intelligence platform that monitors b
                        └─────────────────┘
 ```
 
-### Technology Stack
+### Technology Stack s
 
 **Backend**
 - **Framework**: FastAPI + SQLAlchemy
